@@ -1,0 +1,35 @@
+small_sacrifice = {
+  icon = piety_positive
+}
+
+big_sacrifice = {
+  icon = piety_positive
+}
+
+feast_invitation = {
+  icon = feast_positive
+  }
+  
+feast_insult = {
+  icon = feast_negative
+}
+
+prestigious_duel = {
+  icon = prestige_positive
+  monthly_prestige = 0.7
+}
+  
+pleased_sidhe = {
+  icon = cat_positive
+  development_growth_factor = 0.5
+}
+
+irritated_sidhe = {
+  icon = cat_negative
+  development_growth_factor = -0.35
+}
+
+sidhe_partially_satisfied= {
+  icon = cat_negative
+  development_growth_factor = -0.20
+}

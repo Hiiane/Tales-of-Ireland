@@ -1,0 +1,36 @@
+amazon = {
+	index = 1043
+	
+	fame = yes
+	martial = 3
+	prowess = 3
+	
+	same_opinion = 5
+	
+	genetic = no
+	
+	name = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+				  NOT = { exists = this }
+				}
+				desc = trait_amazon_female
+			}
+			desc = trait_amazon_female
+		}
+	}
+	
+	desc = {
+    first_valid = {
+      triggered_desc = {
+        trigger = { exist = this }
+        desc = trait_amazon_desc
+      }
+      desc = trait_amazon_female_desc
+    }
+  }  
+
+	ai_boldness = high_positive_ai_value
+	ai_energy = high_positive_ai_value
+}

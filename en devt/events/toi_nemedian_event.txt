@@ -1,0 +1,1280 @@
+namespace = toi_nemedian_event
+
+#Animal sacrifice
+
+  toi_nemedian_event.0001 = {
+    type = character_event
+    title = toi_nemedian_event.0001.t
+    desc = toi_nemedian_event.desc
+    theme = faith
+    
+    left_portrait = {
+      character = root
+      animation = personality_zealous
+    }
+    
+    trigger = {
+      has_faith = faith:scythian_heritage
+      has_trait = nemedian
+    }
+    
+    option = { #Just don't take it too far. One bull is enough
+      name = toi_nemedian_event.0001.a
+      capital_county = {
+        change_development_level = -3
+      } 
+      add_piety = 25
+      root:realm_priest = {
+        add_opinion = {
+          modifier = small_sacrifice
+          opinion = 15
+          target = root
+        }
+      }
+    }
+    
+    option = { #We must appease [god of fertility] sith the best cattle we have !
+      name = toi_nemedian_event.0001.b
+      capital_county = {
+        change_development_level = -7
+      }
+      add_piety = 50
+      root.realm_priest = { 
+        add_opinion = {
+          modifier = big_sacrifice
+          opinion = 25
+          target = root
+        }
+      }
+    }
+    
+    option = { #Nonsense ! I won't risk my wealth for the gods
+      name = toi_nemedian_event.0001.c
+      add_piety = -50
+      add_prestige = 20
+      root:realm_priest = {
+        add_opinion = {
+          modifier = no_sacrifice
+          opinion = -30
+          target = root
+        }
+      }
+    }
+  }
+
+# Tomyris' Heritage
+
+  toi_nemedian_event.0002 = {
+    type = character_event
+    title = toi_nemedian_event.0002.t
+    desc = toi_nemedian_event.0002.desc
+    theme = faith
+    
+    left_portrait = {
+      character = root
+      animation = personality_bold
+    }
+    
+    trigger = {
+      has_trait = nemedian
+      has_lifestyle = Warfare #nom ????
+    }
+    
+    option = { #the queen annihilated her enemies like Targitaus' sword !
+      name = toi_nemedian_event.0002.a
+      add_trait = aggressive
+    }
+    
+    option = { #Tomyris was capable enough to organize such a fight
+      name = toi_nemedian_event.0002.b
+      add_trait = Organizer
+    }
+    
+    option = { #Luckily, she knew the terrain well and managed to use it
+      name = toi_nemedian_event.0002.c
+      add_trait = unyielding_defender
+    }
+    
+    option = { #What ? Do I have to lose my child to win a war ? 
+      name = toi_nemedian_event.0002.d
+    }
+  }
+
+# Linguistic Matters 
+
+  toi_nemedian_event.0003 = {
+    type = character_event
+    title = toi_nemedian_event.0003.t
+    desc = toi_nemedian_event.0003.desc
+    theme = learning
+    
+    left_portrait = {
+      character = root
+      animation = rational
+    }
+    
+    trigger = {
+      has_faith = faith:scythian_heritage
+      has_trait = nemedian
+      has_lifestyle = learning
+    }
+    
+    option = { #invent an alphabet
+      name = toi_nemedian_event.0003.a
+      add_learning_lifestyle_xp = 150 #pas sûre de la valeur
+    }
+    
+    option = { #Let's not do that
+      name = toi_nemedian_event.0003.b
+    }
+  }
+  
+# A true warrior 
+
+  toi_nemedian_event.0004 = {
+    type = character_event
+    title = toi_nemedian_event.0004.t
+    desc = toi_nemedian_event.0004.desc
+    theme = feast_activity
+    
+    left_portrait = {
+      character = root 
+      animation = disapproval
+    }
+    
+    right_portrait = {
+      character = bad_knight
+      animation = beg
+    }
+    
+    trigger = {
+      has_faith = faith:scythian_heritage 
+      has_trait = nemedian
+    }
+    
+    immediate = { #select a knight : he hasn't kill anybody this year
+      every_knight = {
+        add_to_list = all_knight
+      }
+      random_in_list = {
+        list = all_knight
+        save_scope_as = bad_knight
+      }
+    }
+    
+    option = { #invite them
+      name = toi_nemedian_event.0003.a
+      add_prestige = -50
+      scope:saved_knight = {
+        add_opinion = {
+          modifier = feast_invitation
+          opinion = 30
+          target = root
+        }
+      }
+    }
+    
+    option = { #no invitation, the kight is offended but your court approves
+      name = toi_nemedian_event.0003.b
+      add_prestige = 50
+      scope:saved_knight = {
+        add_opinion = {
+          modifier = feast_insult
+          opinion = -30
+          target = root
+        }
+      }
+    }
+  }
+  
+  # Training with a bow 1 : I'll ask my marshal to help me
+  
+  toi_nemedian_event.0004 = {
+    type = character_event
+    title = toi_nemedian_event.0004.t
+    desc = toi_nemedian_event.0004.desc
+    theme = martial
+    
+    left_portrait = {
+      character = root
+      animation = personality_rational
+    }
+    
+    right_portrait = {
+      character = root.marshal
+      animation = personality_bold
+    }
+    
+    trigger = {
+      has_trait = nemedian
+      has_faith = faith:scythian_heritage
+      has_councillor_for_skill = martial
+    }
+    
+    option = { #I ask my marshal, he says yes, I pay him for his help, the training shall begin
+      name = toi_nemedian_event.0004.a
+      trigger_event = {
+        id = toi_nemedian_event.4001
+        weeks = { 1 2 } 
+      }
+      add_gold = -30
+    }
+    
+    option = { #I prefer training alone
+      name = toi_nemedian_event.0004.b
+    }
+  }
+  
+  # Training with a bow 2 : The training has just started, and I hit my first target !
+  
+  toi_nemedian_event.4001 = {
+    type = character_event
+    title = toi_nemedian_event.4001.t
+    desc = toi_nemedian_event.4001.desc
+    theme = martial
+    
+    left_portrait = {
+      character = root
+      animation = happiness
+    }
+    
+    right_portrait = {
+      character = root.marshal
+      animation = admiration
+    }
+    
+    trigger = {
+      has_trait = nemedian
+      has_faith = faith:scythian_heritage
+    }
+    
+    option = { # Un jour je serai le meilleur archer, je me battrai sans repis : I want to continue my training !
+      name = toi_nemedian_event.4001.a
+      trigger_event = {
+        id = toi_nemedian_event.4002
+        days = { 7 10 }
+      }
+      add_prestige = { 5 10 }
+      if = {
+        limit = {
+          OR = {
+            has_trait = calm
+          }
+        }
+        add_stress = -10
+      }
+      if = {
+        limit = {$
+          OR = {
+          has_trait = saddistic
+          has_trait = murderer
+          }
+        }
+        add_stress = 10
+      }
+    }
+    
+    option = { #this was way too stressful, let's stop here
+      name = toi_nemedian_event.4001.b
+    }
+  }
+  
+  #Training with a bow 3 : time for the serious practice 
+  
+  toi_nemedian_event.4002 = {
+    type = character_event
+    title = toi_nemedian_event.4002.t
+    desc = toi_nemedian_event.4002.desc
+    theme = martial
+    
+    left_portrait = {
+      character = root
+      animation = personnality_content
+    }
+    
+    right_portrait = {
+      character = root.marshal
+      animation = personality_bold
+    }
+    
+    trigger = {
+      has_trait = nemedian
+      has_faith = faith:scythian_heritage
+    }
+    
+    option = { #I have made great progress, it's time to test myself aggainst my marshal
+      name = toi_nemedian_event.4002.a
+      duel = {
+        skill = martial
+        target = root.marshal
+        50 = {
+          send_interface_toast = {
+            title = toi_nemedian_event.4002.a.success
+            left_icon = root 
+          }
+          root = {
+            add_prestige = 40
+            add_tales_of_war_lifestyle_xp = 100
+          }
+        }
+        50 = {
+          send_interface_toast = {
+           title = toi_nemedian_event.4002.a.fail
+           left_icon = root 
+          }
+          root = {
+            add_stress = 30
+            add_prestige = -40
+          }
+        }
+      }
+    }
+    
+    option = { #I don't feel ready yet, I'll continue my training
+      name = toi_nemedian_event.4002.b
+      trigger_event = {
+        id = toi_nemedian_event.4003
+        weeks = { 3 4 }
+      }
+    }
+  }
+  
+  #Training with a bow 4 : end of the training
+  
+  toi_nemedian_event.4003 = {
+    type = character_event
+    title = toi_nemedian_event.4003.t
+    desc = toi_nemedian_event.4003.desc
+    theme = martial
+    
+    left_portrait = {
+      character = root
+      animation = personality_bold
+    }
+    
+    right_portrait = {
+      character = root.marshal
+      animation = honorable
+    }
+    
+    trigger = {
+      has_trait = nemedian
+      has_faith = faith:scythian_heritage
+    }
+    
+    option = { #The end of the training, I am now known in my court as a great archer
+      name = toi_nemedian_event.4003
+      add_prestige = 30
+      root.marshal = {
+        add_opinion = {
+          modifier = bow_training
+          opinion = 30
+          target = root
+        }
+      } 
+    }
+    
+    option = { # I may be the best archer of my realm, a final duel aggainst my marshal will give a great reputation
+      name = toi_nemedian_event.4003.b
+      duel = {
+        skill = martial
+        target = root.marshal
+        50 = {
+          send_interface_toast = {
+            title = toi_nemedian_event.4003.b.success
+            left_icon = root
+          }
+          root = { 
+            add_character_modifier = {
+              modifier = prestigious_duel
+              years = { 5 7 }
+            }
+            add_tales_of_war_lifestyle_xp = 200
+          }
+        }
+        50 = {
+          root = {
+            add_stress = 45
+            add_prestige = -150
+          }
+        }
+      }
+    }
+  }
+}
+
+#Cat-sith : a cat-sith appear, my druid is scared
+
+  toi_nemedian_event.0005 = {
+    type =character_event
+    title = toi_nemedian_event.0005.t
+    desc = toi_nemedian_event.0005.desc
+    theme = intrigue
+    override_background = { 
+      event_background = alley_night
+    }
+  
+    left_portrait = {
+      character = root
+      animation = worry
+    }
+    
+    trigger = {
+      has_religion = religion:mystical_knowledge_legacy_religion
+      time_of_year = {
+        min = 21.10
+        max = 1.11
+      }
+    }
+    
+    option = { #Fine, we can spare some milk... for a big kitty (outcome 1)
+      name = toi_nemedian_event.0005.a
+      trigger_event = {
+        id = toi_nemedian_event.5001
+        days = 1
+      }
+      add_gold = -15
+    }
+    
+    option = { #Maybe this cat isn't that purr-werful ? (outcome 2)
+      name = toi_nemedian_event.0005.b
+      random_list = {
+        80 = {
+          trigger_event = {
+            id = toi_nemedian_event.5002
+            days = 1
+          }
+        }
+        20 = {
+          send_interface_toast = {
+            title = toi_nemedian_event.0005.fail
+            left_icon = root
+          }
+        }
+      }
+    }
+  }
+
+  toi_nemedian_event.5001 = { #outcome 1 : I gave it milk, It seems it liked it
+    type = character_event
+    title = toi_nemedian_event.5001.t
+    desc = toi_nemedian_event.5001.desc
+    theme = intrigue
+    
+    left_portrait = {
+      character = root
+      animation = happiness
+    }
+    
+    option = {
+      name = toi_nemedian_event.5001.a
+      add_character_modifier = {
+        modifier = pleased_sidhe
+        years = 3
+      }
+      capital_county = {
+        change_development_level = 5
+      }
+    }
+  }
+  
+  toi_nemedian_event.5002 = { #outcome 2 : I had no time to lose with that creature, it didn't please the sidhe
+    type = character_event
+    title = toi_nemedian_event.5002.t
+    desc = toi_nemedian_event.5002.desc
+    theme = intrigue
+    
+    left_portrait = {
+      character = root
+      animation = fear
+    }
+    
+    option = {
+      name = toi_nemedian_event.5002.a
+      add_character_modifier = {
+        modifier = irritated_sidhe
+        years = { 4 6 }
+      }
+      capital_county = {
+        change_development_level = -8
+      }
+    }
+  }
+  
+  # Irusan : a poet come into my hall and ask me to stay
+  
+  toi_nemedian_event.0006 = {
+    type = character_event
+    title = toi_nemedian_event.0006.t
+    desc = toi_nemedian_event.desc
+    theme = intrigue
+    
+    left_portrait = {
+      character = root
+      animation = personality_rational
+    }
+    
+    immediate = { #poete character
+      hidden_effect = {
+        create_character = {
+          location = root.capital_province
+          gender_female_chance = 50
+          template_character = root
+          trait = poet
+          random_traits = yes
+          age = { 18 50 }
+          save_scope_as = Irusan_hater
+        }
+      }
+    }
+    
+    trigger = {
+      has_religion = religion:mystical_knowledge_legacy_religion
+    }
+    
+    option = { #let him stay for the night 
+      name = toi_nemedian_event.0006.a 
+      add_gold = -10
+      trigger_event = {
+        id = toi_nemedian_event.6001
+      }
+    }
+    
+    option = { #GO AWAY !
+      name = toi_nemedian_event.0006.b
+    }
+  }
+  
+  toi_nemedian_event.6001 = { #the poet insults Irusan in a song during the dinner
+    type = character_event
+    title = toi_nemedian_event.6001.t 
+    desc = toi_nemedian_event.desc
+    theme = feast_activity
+    
+    left_portrait = {
+      character = root
+      animation = disapproval
+    }
+    
+    trigger = {
+      has_religion = religion:mystical_knowledge_legacy_religion
+    }
+    
+    option = { #I will sacrifice the stupid bard, it may calm the sidhe
+      name = toi_nemedian_event.6001.a 
+      stress_impact = { 
+        saddistic = medium_stress_impact_loss
+        generous = major_stress_impact_gain
+        gregarious = major_stress_impact_gain
+      }
+      scope:irusan_hater = {
+        death = {
+          killer = scope:blotter
+          death_reason = death_sacrificed_to_gods
+        }
+      }
+      every_vassal = {
+        add_opinion = {
+          target = root
+          modifier = Sacrified_poet
+          opinion = -10
+        }
+      }
+      add_trait = murderer
+      random_list = { #The sidhe is very angry, even a human sacrifice may not calm it 
+        80 = { #Fortunately, it works ! We are safe !
+          add_character_modifier = {
+            modifier = pleased_sidhe
+            years = 3
+          }
+        }
+        20 = { # The sidhe isn't entirely satisfied... We are cursed !
+          add_character_modifier = {
+            modifier = sidhe_partially_satisfied
+            years = { 4 6 }
+          }
+        }
+      }
+    }
+    
+    option = { #A human life, even a stupid one, is too precious. I cannot sacrify this poor poet
+      name = toi_nemedian_event.6001.b
+      stress_impact = { 
+        saddistic = medium_stress_impact_loss
+        generous = major_stress_impact_gain
+        gregarious = major_stress_impact_gain
+      }
+      add_character_modifier = {
+        modifier = irritated_sidhe
+        years = 5
+      }
+    }
+  }
+  
+  # Stolen Tapestry
+  
+  toi_nemedian_event.0007 = { #A tapestry has been stolen, you can investigate and, maybe, unmask the thief
+    type = character_event
+    title = toi_nemedian_event.0007.t
+    desc = toi_nemedian_event.0007.desc
+    theme = intrigue
+    override_background = {
+      event_background = council_chamber
+    }
+    
+    left_portrait = {
+      character = root
+      animation = anger
+    }
+    
+    option = { # Time to investigate ! 
+      name = toi_nemedian_event.0007.a
+      hidden_effect = { 
+        random_list = {
+          70 = { # A merchant is in town and somebody saw your tapestry on his display
+            trigger_event = {
+              id = toi_nemedian_event.7001
+              days = 1
+            }
+          }
+          30 = { # You saw a shadow running in the corridor during the night, may it be the thief ?
+            trigger_event = {
+              id = toi_nemedian_event.7002
+              days = 1
+            } 
+          }
+        }
+      }
+    }
+    
+    option = { #It doesn't worth it
+      name = toi_nemedian_event.0007.b
+      add_gold = -35
+    }
+  }
+  
+  #Merchant (outcome 1)
+  
+  toi_nemedian_event.7001 = { # A merchant is in town and somebody saw your tapestry on his display, let's capture him ! You and your guard go to the market to search for the merchant
+    type = character_event
+    title = toi_nemedian_event.7001.t
+    desc = toi_nemedian_event.7001.desc 
+    theme = intrigue
+    override_background = {
+      event_background = market
+    }
+    
+    left_portrait = {
+      character = root
+      animation = personality_vengeful
+    }
+    
+    option = { #I can see the merchant and he has my tapestry! Guard ! Take him ! 
+      name = toi_nemedian_event.7001.a
+      random_list = {
+        70 = { # The merchant is captured
+          send_interface_toast = {
+            left_icon = root
+            title = toi_nemedian_event.7001.a.success
+          add_prestige = 30
+          add_gold = 15
+        }
+        
+        30 = { #The merchant ran away
+          send_interface_toast = {
+            left_icon = root
+            title = toi_nemedian_event.7001.a.fail
+          add_prestige = -40
+          add_stress = 20
+        }
+      }
+    }
+    
+    option = { #leave him alone, he needs it more than me
+      name = toi_nemedian_event.7001.b
+      add_gold = -35
+      stress_impact = { 
+        saddistic = medium_stress_impact_gain
+        generous = medium_stress_impact_loss
+        gregarious = medium_stress_impact_loss
+      }
+    }
+  }
+  
+  #other outcomes : 
+  
+  toi_nemedian_event.7002 = { #you saw a shadow running in the corridor during the night, may it be the thief ? You may interrogate your court
+    type = character_event
+    title = toi_nemedian_event.7002.t 
+    desc = toi_nemedian_event.7002.desc
+    theme = intrigue 
+    override_background = {
+      event_background = corridor_night
+    }
+    
+    left_portrait = { 
+      character = root 
+      animation = personality_rational
+    }
+    
+    option = { # Interrogate your court
+      name = toi_nemedian_event.7002.a
+      hidden_effect = {
+        random_list = {
+          25 = { # a child took it to play (encore 1 evt)
+            trigger_event = {
+              id = toi_nemedian_event.7003.child
+            }
+          }
+          15 = { # a murderer took it to hide a crime (encore 2 evt)
+            trigger_event = { 
+              id = toi_nemedian_event.7003.murderer
+            }
+          }
+          15 = { # religious hate crime (encore 1 evt)
+            trigger_event = {
+              id = toi_nemedian_event.7003.hate_crime
+            }
+          }
+        }
+      }
+    }
+    
+    option = { # Ne pas interroger
+      name = toi_nemedian_event.7002.b
+      add_gold = -35
+    } 
+  }
+  
+  #An innocent child took your tapestry (outcome 2.1)
+  
+  toi_nemedian_event.7003.child = { #somebody saw a child playing in the corridor yesterday evening, you find a child playing in the garden with your tapestry
+    type = character_event 
+    title = toi_nemedian_event.7003.child.t
+    desc = toi_nemedian_event.7003.child.desc
+    theme = intrigue
+    override_background = {
+      event_background = garden
+    }
+    
+    left_icon = {
+      character = root 
+      animation = shock
+    }
+    
+    option = { #you try to take back your tapestry from the child hand
+      name = toi_nemedian_event.7003.child.a
+      random_list = {
+        40 = { # your tapestry is now safe with you
+          add_stress = -20
+          add_gold = 5
+          send_interface_toast = {
+            left_icon = root
+            title = toi_nemedian_event.7003.child.success
+          }
+        }
+        30 = { #your tapestry is now in your hand but when you tried to take it back from the child a tear appeared
+          add_stress = -10
+          add_gold = -10
+          send_interface_toast = {
+            left_icon = root
+            title = toi_nemedian_event.7003.child.intermediare
+          }
+        }
+        30 = { #the child ran away before you could even approach him, the tapestry remains on the floor, it is very dirty and torn into pieces.
+          add_stress = 20
+          add_gold = -20
+          send_interface_toast = {
+            left_icon = root
+            title = toi_nemedian_event.7003.child.fail
+          }
+        }
+      }
+    }
+    
+    option = { #this child seems so happy with, sseing play and laugh in the garden is a soothing sight
+      stress_impact = { 
+        saddistic = medium_stress_impact_gain
+        generous = medium_stress_impact_loss
+        gregarious = medium_stress_impact_loss
+        greedy = medium_stress_impact_gain
+      }
+      add_gold = -35
+    }
+  }
+  
+  #A murderer took your tapestry (outcome 2.2)
+
+  toi_nemedian_event.7003.murderer = { # one of your guard found some blood on the ground in the room where your tapestry was 
+    # idée : le corps de la personne tué est un membre de la famille du root, si le joueur decide d'enqueter par lui même il risque de trouver lae tueur --> duel à mort de martial 
+    type = character_event
+    title = toi_nemedian_event.7003.murderer.t
+    desc = toi_nemedian_event.7003.murderer.desc
+    theme = intrigue
+    override_background = {
+      event_background = council_chamber
+    }
+    
+    left_portrait = {
+      character = root
+      theme = personality_rational
+    }
+    
+    option = { #je vais demander à toute ma garde de partir enqueter et fouiller chaque chaumière de la capitale !
+      name = toi_nemedian_event.7003.murderer.a
+      capital_county = {
+        change_development_level = { -5 -1 }
+      }
+      trigger_event = {
+        id = toi_nemedian_event.7004.murderer.guard
+        days = { 2 7 }
+      }
+    }
+    
+    option = { #je vais enqueter moi-meme pour plus de discretion ! Lae tueur.euse est peut etre toujours dans les parages
+      name = toi_nemedian_event.7003.murderer.b
+      add_stress = 20
+      trigger_event = {
+        id = toi_nemedian_event.7004.murderer.alone
+        days = { 7 14 }
+      }
+    }
+  }
+
+  toi_nemedian_event.7004.murderer.guard = { #after investigation, a body has been found, [name] is dead, killed by the murderer, the body has been wrapped in the tapestry to hide the crime. 
+    type = character_event
+    title = toi_nemedian_event.7004.murderer.guard.t
+    desc = toi_nemedian_event.7004.murdere.guard.desc
+    theme = intrigue
+    override_background = {
+      event_background = army_camp
+    }
+    
+    left_portrait = {
+      character = root
+      animation = fear
+    }
+    
+    immediate = {
+      every_close_family_member = {
+        add_to_list = family_member_list
+      }
+      random_in_list = {
+        list = family_member_list
+        save_scope_as = dead_family_member
+      }
+      random_list = {
+        80 = {
+          scope:dead_family_member = {
+            death = {
+              death_reason = death_strangled_with_own_intestines
+            }
+          }
+        }
+        20 = {
+          scope:dead_family_member = {
+            add_trait = wounded_3 
+          }
+        }
+      }
+    }
+    
+    option = { #the end is near, I am in danger, I should reinforce my guard
+      name = toi_nemedian_event.7004.murderer.guard.a
+      add_stress = 20
+      add_gold = -25
+      add_tyranny = minor_tyranny_gain
+      send_interface_toast = { #le temps passe, plus rien n'arriver, lae meutrier.e a fuit, le mystere restera entier à tout jamais
+        title = toi_nemedian_event.7004.murderer.guard.a.end
+        months = 1
+      }
+    }
+    
+    option = { #le meurtrier ne reussira pas a semer la terreur dans le chateau ! 
+      name = toi_nemedian_event.7004.murderer.guard.b
+      add_stress = 40
+      random_list = {
+        15 = {
+          root = {
+            death = {
+              death_reason = death_skull_cracked_open
+            }
+          }
+          send_interface_toast = {
+            title = toi_nemedian_event.7004.murderer.guard.death
+            left_icon = root
+          }
+        }
+        20 = {
+          add_trait = wounded_2
+          send_interface_toast = {
+            title = toi_nemedian_event.7004.murderer.guard.wounded
+            left_icon = root
+          }
+        }
+        65 = {
+          add_prestige = 70
+          send_interface_toast = { #le temps passe, plus rien n'arriver, lae meutrier.e a fuit, le mystere restera entier à tout jamasi
+            title = toi_nemedian_event.7004.murderer.guard.success
+            left_icon = root
+          }
+        }
+      }
+    }
+  }
+  
+  toi_nemedian_event.7004.murderer.alone = { #vous enquetez partout dans le chateau, vous trouvez des traces de sangs à differents endroits, une nuit alors que vous vous dirigiez vers les cuisines pour un repas nocturne, vous tombez nez à nez avec un homme. il portait un manteau noir et son visage etait caché sous une large capuche. A sa main : un couteau. Serait-ce le meurtrier ?
+    type = character_event
+    title = toi_nemedian_event.7004.murderer.alone.t
+    desc = toi_nemedian_event.7004.murderer.alone.desc
+    theme = intrigue
+    override_background = {
+      event_background = corridor_night
+    }
+    
+    left_portrait = {
+      character = root
+      animation = stress
+    }
+    
+    right_portrait = {
+      character = scope:murderer_rival
+      animation = war_attacker
+    }
+    
+    immediate = {
+      hidden_effect = {
+        every_dynasty_member = {
+          limit = {
+            OR = {
+              has_relation_rival = yes 
+              has_relation_potential_rival = yes 
+            }
+          }
+          add_to_list = list_of_murderers
+        }
+        every_vassal = {
+          limit = {
+            OR = {
+              has_relation_rival = yes 
+              has_relation_potential_rival = yes 
+            }
+          }
+          add_to_list = list_of_murderers
+        }
+        random_in_list = { 
+          list = list_of_murderers
+          save_scope_as = murderer_rival
+        }
+        if = {
+          limit = { 
+            NOT = {
+              exists = scope:murderer_rival
+            }
+          }
+          create_character = {
+            location = root.capital_province
+            gender_female_chance = 50
+            template_character = root
+            trait = murderer
+            random_traits = yes
+            age = { 18 50 }
+            prowess = { 10 20 }
+          }
+          save_scope_as = murderer_rival
+        }
+      }
+    }
+    
+    option = { # je vais le combattre, il est temps d'en finir ! 
+      name = toi_nemedian_event.7004.murderer.alone.a 
+      duel = {
+        skill = prowess
+        target = scope:murderer_rival
+        50 = {
+          send_interface_toast = {
+            title = toi_nemedian_event.4002.a.fail
+            left_icon = root 
+            right_icon = scope:murderer_rival
+          }
+          root = {
+            death = {
+              death_reason = death_ripped_apart_limb_by_limb
+              killer = scope:murderer_rival
+            }
+          }
+        }
+        50 = {
+          send_interface_toast = {
+            title = toi_nemedian_event.4002.a.success
+            left_icon = root 
+          }
+          root = {
+            if = {
+              limit = {
+                OR = {
+                  has_trait = saddistic
+                  has_trait = callous
+                }
+              }
+              add_stress = -40
+            }
+            add_prestige = 150
+            add_tales_of_war_lifestyle_perkpoint = 1
+            add_prowess = 2
+          }
+          scope:murderer_rival = {
+            death = {
+              death_reason = death_heart_ripped_out
+              killer = root
+            }
+          }
+        }
+      }
+    }
+    
+    option = { #je prends la fuite et appel à l'aide, mes gardes reussiront peut-etre à le capturer
+      name = toi_nemedian_event.7004.murderer.alone.b
+      add_stress = 20
+      add_prestige = 50
+       hidden_effect = {
+        random_list = {
+          50 = {
+            add_gold = 10
+            add_stress = -15
+            add_tales_of_war_lifestyle_xp = 100
+            imprison_character_effect = {
+              TARGET = scope:murderer_rival
+              IMPRISONER = root
+            }
+            send_interface_toast = {
+              title = toi_nemedian_event.7004.murderer.b.success
+              left_icon = root
+              right_icon = murderer_rival
+            }
+          }
+          50 = {
+            add_tales_of_war_lifestyle_xp = -100
+            add_stress = 15
+            add_prowess = -1
+            send_interface_toast = {
+              title = toi_nemedian_event.7004.murderer.b.fail 
+              left_icon = root 
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  # religious hate crime (outcome 2.3)
+  
+  toi_nemedian_event.7003.hate_crime = { #pendant la promenade matinale quotidienne le long des remparts du chateau, tu appercois de la fumée au loin, émanant du temple. Serait ce un incendie ? 
+    type = character_event
+    title = toi_nemedian_event.7003.hate_crime.t
+    desc = toi_nemedian_event.7003.hate_crime.desc
+    theme = intrigue
+    override_background = {
+      event_background = corridor_day
+    }
+    
+    left_portrait = {
+      character = root 
+      animation = shock
+    }
+    
+    option = { #aller y jeter un oeil seul, c'est surement pas grand chose, il ne semble pas y avoir d'agitation particulière autour indiquant un incendie
+      name = toi_nemedian_event.7003.hate_crime.a
+      trigger_event = {
+        id = toi_nemedian_event.7004.hate_crime.alone 
+      }
+    }
+    
+    option = { #y envoyer toute ma garde, il vaut mieux ne prendre aucun risque
+      name = toi_nemedian_event.7004.hate_crime.b
+      capital_county = {
+        change_development_level = { -5 -1 }
+      }
+      trigger_event = {
+        id = toi_nemedian_event.7004.hate_crime.guard
+    }
+  }
+  
+  toi_nemedian_event.7004.hate_crime.alone = { #Au centre du temple, se trouve un la tapisserie, en feu, un homme danse et chante autour de celle-ci. Autour de lui se trouve des reliques brisées. 
+    type = character_event
+    title = toi_nemedian_event.7004.hate_crime.alone.t
+    desc = toi_nemedian_event.7004.hate_crime.alone.desc 
+    theme = intrigue
+    override_background = {
+      event_background = temple
+    }
+    
+    left_portrait = {
+      character = root
+      animation = shock
+    }
+    
+    immediate = {
+      hidden_effect = {
+        create_character = {
+          location = root.capital_province
+          gender_female_chance = 50
+          template_character = root
+          random_faith = {
+            #jsp
+          }
+          random_traits = yes
+          age = { 18 50 }
+          learning = { 10 20 }
+        }
+        save_scope_as = religious_hater
+      }
+    }
+    
+    option = { #I'll try to stop him
+      name = toi_nemedian_event.7004.hate_crime.alone.a
+      duel = {
+        skill = learning
+        target = scope:religious_hater
+        50 = {
+          add_trait = wounded_2
+          add_stress = 10
+          add_prestige = -70
+          send_interface_toast = {
+            title = toi_nemedian_event.7004.hate_crime.alone.success
+            left_icon = root
+          }
+        }
+        50 = {
+          imprison_character_effect = {
+            TARGET = scope:religious_hater
+            IMPRISONER = root
+          }
+          add_learning = 2
+          add_prestige = 50
+          send_interface_toast = {
+            title = toi_nemedian_event.7004.hate_crime.alone.fail
+            left_icon = root
+          }  
+        }
+      }
+    }
+    
+    option = { #GAAAAAARDES !! ALED ! 
+      name = toi_nemedian_event.7004.hate_crime.alone.b 
+      add_stress = 20
+      add_prestige = 15
+      imprison_character_effect = {
+        TARGET = scope:religious_hater
+        IMPRISONER = root
+      }
+    }
+  }
+  
+  toi_nemedian_event.7004.hate_crime.guard = { #les guardes partent en direction du temple, armer de seau d'eau, et tombent nez à nez avec un paiens ce dernier chante et danse autour d'un feu, alimenté par la tapisserie !
+    type = character_event
+    title = toi_nemedian_event.7004.hate_crime.guard.t
+    desc = toi_nemedian_event.7004.hate_crime.guard.desc
+    theme = faith
+    override_background = {
+      event_background = temple
+    }
+    
+    left_portrait = {
+      character = root
+      animation = stress
+    }
+    
+    option = {
+      name = toi_nemedian_event.7004.hate_crime.guard.a
+      add_piety = 90
+      # déclarer un genre de guerre sainte ? Donner un casus beli ? 
+    }
+    
+    option = {
+      name = toi_nemedian_event.7004.hate_crime.guard.b
+      imprison_character_effect = {
+        TARGET = scope:religious_hater
+        IMPRISONER = root
+      }
+      add_piety = 45
+    }
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
